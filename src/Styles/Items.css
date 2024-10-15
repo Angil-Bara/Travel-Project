@@ -1,0 +1,90 @@
+.wrapper {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #020202;
+}
+
+.container {
+    width: 400px; /* Fixed width for vertical cards */
+    display: flex;
+    flex-direction: column; /* Change layout to column */
+    align-items: center;
+}
+
+.card {
+    height: 80px; /* Initial collapsed height */
+    width: 100%; /* Full width of the container */
+    border-radius: .75em;
+    cursor: pointer;
+    overflow: hidden;
+    margin: 10px 0; /* Adjust margin for vertical spacing */
+    display: flex;
+    flex-direction: column; /* Stack content vertically */
+    justify-content: flex-start;
+    transition: height 0.6s cubic-bezier(.28,-0.03,0,.00);
+    box-shadow: 0px 0px 30px -5px rgba(255, 255, 255, 0.8);
+}
+
+.card > .row {
+    color: white;
+    display: flex;
+    flex-direction: column; /* Vertical layout */
+    align-items: center;
+}
+
+.card > .row > .icon {
+    background: #223;
+    color: white;
+    border-radius: 50px;
+    width: 54px;
+    height: 54px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+}
+
+.card > .row > .description {
+    opacity: 0; /* Hidden initially */
+    height: 0px; /* Start with height 0 */
+    overflow: hidden;
+    transition: all .3s ease;
+    padding: 0 10px;
+}
+
+.description h2, .description p {
+    color: #b0b0ba;
+    padding-top: 5px;
+    margin: 0; /* Ensure there's no margin pushing content away */
+}
+
+input[type="checkbox"] {
+    display: none; /* Hide the checkbox */
+}
+
+/* When the checkbox is checked, expand the card */
+input[type="checkbox"]:checked + label {
+    height: 300px; /* Expand height on selection */
+}
+
+/* When the checkbox is checked, show the description */
+input[type="checkbox"]:checked + label .description {
+    height: auto; /* Expand to fit content */
+    opacity: 1 !important; /* Ensure the description is visible */
+    transform: translateY(0px) !important; /* Reset any transform */
+}
+
+/* When the checkbox is unchecked, shrink the card */
+input[type="checkbox"]:not(:checked) + label {
+    height: 80px; /* Collapse back to original height */
+}
+
+/* When the checkbox is unchecked, hide the description */
+input[type="checkbox"]:not(:checked) + label .description {
+    height: 0px; /* Collapse the description */
+    opacity: 0; /* Hide the content */
+    transform: translateY(30px); /* Move it out of view */
+}

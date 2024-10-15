@@ -1,17 +1,29 @@
-import React from 'react';
+import { React, Suspense} from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import Scene from './Scene';
+import { Canvas } from '@react-three/fiber';
+import './Styles/App.css'
+import Loading from './Loading';
+import Locations from './Locations';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
+  <>
+  <Suspense fallback={<Loading/>}>
+    <div className='holder'>
+      <div className='Item'> <Locations /></div>
+ 
+      <div className='App'>
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+          <Canvas>
+            <ambientLight intensity={5} />
+            <directionalLight position={[0, 0, 5]} />
+              <Scene />
+          </Canvas>
+
+      </div>
+      </div>
+    </Suspense>
+  </>
+
+);
